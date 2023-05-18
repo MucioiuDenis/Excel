@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  <!-- Office Add-in root element with specified namespaces -->
+
+  <Id>b76025f2-c0cc-4d84-b64e-f52288ab1d02</Id>
+  <!-- Unique identifier for the add-in -->
+
+  <Version>1.0.0.0</Version>
+  <!-- Version number of the add-in -->
+
+  <ProviderName>Cognizant</ProviderName>
+  <!-- Name of the provider or creator of the add-in -->
+
+  <DefaultLocale>en-US</DefaultLocale>
+  <!-- Default locale for the add-in -->
+
+  <DisplayName DefaultValue="Cognizant AddIn"/>
+  <!-- Display name of the add-in -->
+
+  <Description DefaultValue="Write your own Excel functions in TypeScript."/>
+  <!-- Description of the add-in -->
+
+  <IconUrl DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+  <!-- URL of the icon for the add-in -->
+
+  <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-64.png"/>
+  <!-- URL of the high-resolution icon for the add-in -->
+
+  <SupportUrl DefaultValue="https://www.contoso.com/help"/>
+  <!-- URL of the support website for the add-in -->
+
+  <AppDomains>
+    <AppDomain>https://www.contoso.com</AppDomain>
+  </AppDomains>
+  <!-- Domains that the add-in is allowed to access -->
+
+  <Hosts>
+    <Host Name="Workbook"/>
+  </Hosts>
+  <!-- Supported Office application hosts (Workbook in this case) -->
+
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="CustomFunctionsRuntime" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <!-- Office versions and runtime requirements for the add-in -->
+
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
+  </DefaultSettings>
+  <!-- Default settings for the add-in -->
+
+  <Permissions>ReadWriteDocument</Permissions>
+  <!-- Permissions required by the add-in -->
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <!-- Start of version-specific overrides -->
+
+    <Hosts>
+      <Host xsi:type="Workbook">
+        <!-- Overrides for Workbook host -->
+
+        <AllFormFactors>
+          <ExtensionPoint xsi:type="CustomFunctions">
+            <!-- Overrides for custom functions extension point -->
+
+            <Script>
+              <SourceLocation resid="Functions.Script.Url"/>
+            </Script>
+            <!-- Location (URL) of the JavaScript file for custom functions -->
+
+            <Page>
+              <SourceLocation resid="Functions.Page.Url"/>
+            </Page>
+            <!-- Location (URL) of the HTML page for custom functions -->
+
+            <Metadata>
+              <SourceLocation resid="Functions.Metadata.Url"/>
+            </Metadata>
+            <!-- Location (URL) of the metadata for custom functions -->
+
+            <Namespace resid="Functions.Namespace"/>
+            <!-- Namespace for the custom functions -->
+          </ExtensionPoint>
+        </AllFormFactors>
+
+        <DesktopFormFactor>
+          <!-- Overrides for desktop form factor -->
+
+          <GetStarted>
+            <Title resid="GetStarted.Title"/>
+            <!-- Title of the get started section -->
+
+            <Description resid="GetStarted.Description"/>
+            <!-- Description of the get started section -->
+
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl"/>
+            <!-- URL to learn more about the add-in -->
+          </GetStarted>
+
+          <FunctionFile resid="Commands.Url"/>
+          <!-- URL of the JavaScript file that contains the add-in's functions -->
+
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <!-- Overrides for primary commands (ribbon customization) -->
+
+            <OfficeTab id="TabHome">
+              <!-- Office tab where the add-in's ribbon group will be located -->
+
+              <Group id="CommandsGroup">
+                <!-- Group within the Office tab for the add-in's commands -->
+
+                <Label resid="CommandsGroup.Label"/>
+                <!-- Label of the group -->
+
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                <!-- Icons for the group and its associated button -->
+
+                <Control xsi:type="Button" id="TaskpaneButton">
+                  <!-- Button control in the group -->
+
+                  <Label resid="TaskpaneButton.Label"/>
+                  <!-- Label of the button -->
+
+                  <Supertip>
+                    <Title resid="TaskpaneButton.Label"/>
+                    <!-- Title of the button's tooltip -->
+
+                    <Description resid="TaskpaneButton.Tooltip"/>
+                    <!-- Description of the button's tooltip -->
+                  </Supertip>
+
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <!-- Icons for the button -->
+
+                  <Action xsi:type="ShowTaskpane">
+                    <!-- Action to be performed when the button is clicked -->
+
+                    <TaskpaneId>ButtonId1</TaskpaneId>
+                    <!-- Unique ID for the task pane -->
+
+                    <SourceLocation resid="Taskpane.Url"/>
+                    <!-- URL of the HTML page (task pane) to be shown -->
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <!-- Localized resources for the add-in -->
+
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:3000/assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:3000/assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:3000/assets/icon-80.png"/>
+      </bt:Images>
+      <!-- Images used in the add-in -->
+
+      <bt:Urls>
+        <bt:Url id="Functions.Script.Url" DefaultValue="https://localhost:3000/public/functions.js"/>
+        <bt:Url id="Functions.Metadata.Url" DefaultValue="https://localhost:3000/public/functions.json"/>
+        <bt:Url id="Functions.Page.Url" DefaultValue="https://localhost:3000/public/functions.html"/>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
+      </bt:Urls>
+      <!-- URLs used in the add-in -->
+
+      <bt:ShortStrings>
+        <bt:String id="Functions.Namespace" DefaultValue="CONTOSO"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
+        <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Show Taskpane"/>
+      </bt:ShortStrings>
+      <!-- Short strings used in the add-in -->
+
+      <bt:LongStrings>
+        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded successfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+      </bt:LongStrings>
+      <!-- Long strings used in the add-in -->
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
